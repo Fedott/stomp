@@ -3,8 +3,9 @@
 namespace Amp\Stomp\Test;
 
 use Amp\Stomp\Frame;
+use PHPUnit\Framework\TestCase;
 
-class FrameTest extends \PHPUnit_Framework_TestCase
+class FrameTest extends TestCase
 {
     public function testGetCommand()
     {

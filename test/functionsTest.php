@@ -3,8 +3,9 @@
 namespace Amp\Stomp\Test;
 
 use function Amp\Stomp\parse;
+use PHPUnit\Framework\TestCase;
 
-class FunctionsTest extends \PHPUnit_Framework_TestCase
+class FunctionsTest extends TestCase
 {
     public function testBasicParse()
     {
