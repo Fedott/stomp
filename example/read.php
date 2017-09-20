@@ -16,10 +16,15 @@ $client = new Amp\Stomp\Client($uri);
     });
 
     // subscribe to the messages we're sending
-    $subscriptionId = yield $client->subscribe("/exchange/stomp-test/*.*");
+    yield $client->subscribe("/exchange/stomp-test/*.*", [
+        'ack' => 'client',
+    ]);
 
     // dump all messages we receive to the console
     while (true) {
-        echo yield $client->read(), "\n\n";
+        /** @var \Amp\Stomp\Frame $frame */
+        $frame = yield $client->read();
+        echo "{$frame}\n\n";
+        yield $client->ack($frame->getHeaders()['ack']);
     }
 });

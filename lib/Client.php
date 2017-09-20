@@ -247,7 +247,7 @@ class Client
 
         $localMax = $this->options[self::OPTIONS["heart_beat_max"]];
         $max = ($remoteMax > $localMax) ? $remoteMax : $localMax;
-        $this->heartbeatWatcher = Loop::repeat(1000, function () use ($max) {
+        $this->heartbeatWatcher = Loop::repeat(500, function () use ($max) {
             $this->doHeartbeat($max); 
         });
     }
@@ -259,10 +259,10 @@ class Client
             return;
         }
 
-        // if the heartbeat timout has yet to elapse we don't need to send
+        // if the heartbeat timeout has yet to elapse we don't need to send
         $now = \microtime(true);
         $msSinceLastSend = (($now - $this->lastDataSentAt) * 1000);
-        if ($msSinceLastSend < ($interval - 1000)) {
+        if ($msSinceLastSend < ($interval / 2 - 1000)) {
             return;
         }
 
